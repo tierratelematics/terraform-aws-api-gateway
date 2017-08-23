@@ -46,6 +46,8 @@ resource "aws_api_gateway_integration_response" "response_integration" {
     "method.response.header.Access-Control-Allow-Origin" = "'*'"
   }
 
+  content_handling = "${var.integration_response_content_handling}"
+
   response_templates = "${var.integration_response_templates}"
 }
 

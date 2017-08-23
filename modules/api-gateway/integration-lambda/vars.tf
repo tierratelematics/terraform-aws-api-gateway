@@ -64,14 +64,27 @@ variable "integration_request_templates" {
   }
 }
 
+variable "integration_response_content_handling" {
+  description = "Specifies how to handle request payload content type conversions. Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT. If this property is not defined, the request payload will be passed through from the method request to integration request without modification, provided that the passthroughBehaviors is configured to support payload pass-through."
+  default = ""
+}
+
 variable "integration_response_templates" {
   type = "map"
-
   default = {}
 }
 
 variable "method_response_models" {
   type = "map"
+  default = {}
+}
 
+variable "method_response_parameters" {
+  type = "map"
+  default = {}
+}
+
+variable "integration_response_parameters" {
+  type = "map"
   default = {}
 }
