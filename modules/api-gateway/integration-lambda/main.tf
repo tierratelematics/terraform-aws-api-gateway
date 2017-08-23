@@ -11,19 +11,19 @@ terraform {
 //
 
 resource "aws_api_gateway_method" "request_method" {
-  rest_api_id   = "${var.api_gateway_id}"
-  resource_id   = "${var.api_gateway_resource_id}"
+  rest_api_id   = "${var.rest_api_id}"
+  resource_id   = "${var.parent_resource_id}"
   http_method   = "${var.http_method}"
   authorization = "${var.authorization}"
 }
 
 resource "aws_api_gateway_integration" "request_integration" {
-  rest_api_id             = "${var.api_gateway_id}"
-  resource_id             = "${var.api_gateway_resource_id}"
+  rest_api_id             = "${var.rest_api_id}"
+  resource_id             = "${var.parent_resource_id}"
   http_method             = "${aws_api_gateway_method.request_method.http_method}"
   integration_http_method = "${var.integration_http_method}"
   type                    = "${var.integration_type}"
-  uri                     = "${var.api_gateway_lambda_arn}"
+  uri                     = "${var.lambda_arn}"
   credentials             = "${var.api_gateway_role_arn}"
 
   content_handling     = "${var.content_handling}"
@@ -37,8 +37,8 @@ resource "aws_api_gateway_integration" "request_integration" {
 //
 
 resource "aws_api_gateway_integration_response" "response_integration" {
-  rest_api_id = "${var.api_gateway_id}"
-  resource_id = "${var.api_gateway_resource_id}"
+  rest_api_id = "${var.rest_api_id}"
+  resource_id = "${var.parent_resource_id}"
   http_method = "${aws_api_gateway_method.request_method.http_method}"
   status_code = "${aws_api_gateway_method_response.response_method.status_code}"
 
@@ -52,8 +52,8 @@ resource "aws_api_gateway_integration_response" "response_integration" {
 }
 
 resource "aws_api_gateway_method_response" "response_method" {
-  rest_api_id = "${var.api_gateway_id}"
-  resource_id = "${var.api_gateway_resource_id}"
+  rest_api_id = "${var.rest_api_id}"
+  resource_id = "${var.parent_resource_id}"
   http_method = "${aws_api_gateway_method.request_method.http_method}"
   status_code = "200"
 

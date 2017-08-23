@@ -2,20 +2,20 @@
  * Required
  */
 
-variable "api_gateway_id" {
+variable "rest_api_id" {
   description = "The ID of the REST API."
-}
-
-variable "api_gateway_resource_id" {
-  description = "The API resource ID where attach the Lambda integration."
 }
 
 variable "api_gateway_role_arn" {
   description = "The ARN of the IAM Role used by the API Gateway"
 }
 
-variable "api_gateway_lambda_arn" {
-  description = "The ARN of the Lambda for the integration"
+variable "parent_resource_id" {
+  description = "The API resource ID where attach the Lambda integration."
+}
+
+variable "lambda_arn" {
+  description = "The ARN of the Lambda for the integration backend."
 }
 
 /*
