@@ -39,9 +39,13 @@ variable "authorization" {
   default     = "NONE"
 }
 
+variable "api_key_required" {
+  description = "Specify if the method requires an API key"
+  default     = false
+}
+
 variable "method_request_models" {
   type = "map"
-
   default = {}
 }
 
