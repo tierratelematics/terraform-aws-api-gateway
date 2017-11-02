@@ -1,5 +1,5 @@
 terraform {
-  required_version = ">= 0.9"
+  required_version = "~> 0.9"
 }
 
 /*
@@ -30,7 +30,7 @@ resource "aws_api_gateway_integration" "request_integration" {
   content_handling     = "${var.content_handling}"
   passthrough_behavior = "${var.passthrough_behavior}"
 
-  request_templates    = "${var.integration_request_templates}"
+  request_templates = "${var.integration_request_templates}"
 }
 
 //
@@ -43,9 +43,7 @@ resource "aws_api_gateway_integration_response" "response_integration" {
   http_method = "${aws_api_gateway_method.request_method.http_method}"
   status_code = "${aws_api_gateway_method_response.response_method.status_code}"
 
-  response_parameters = {
-    "method.response.header.Access-Control-Allow-Origin" = "'*'"
-  }
+  response_parameters = "${var.integration_response_parameters}"
 
   content_handling = "${var.integration_response_content_handling}"
 
@@ -60,7 +58,5 @@ resource "aws_api_gateway_method_response" "response_method" {
 
   response_models = "${var.method_response_models}"
 
-  response_parameters = {
-    "method.response.header.Access-Control-Allow-Origin" = true
-  }
+  response_parameters = "${var.method_response_parameters}"
 }
